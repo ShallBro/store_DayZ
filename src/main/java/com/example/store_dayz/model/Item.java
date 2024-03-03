@@ -6,11 +6,8 @@ import lombok.Data;
 
 @Data
 public class Item {
-  private int id;
   private String name;
   private String description;
-  private Image image_path;
-  // Отрефакторить поле категория на enum
   private String category;
   private List<String> available_servers;
   private Integer price;
