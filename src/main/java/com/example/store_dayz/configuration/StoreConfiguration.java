@@ -16,7 +16,7 @@ public class StoreConfiguration {
   public Session session(){
     org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration().addAnnotatedClass(ItemsEntity.class);
     SessionFactory sessionFactory = configuration.buildSessionFactory();
-    return sessionFactory.getCurrentSession();
+    return sessionFactory.openSession();
   }
 
 }
