@@ -10,5 +10,4 @@ public class Item {
   private String category;
   private List<String> available_servers;
   private Integer price;
-
 }
