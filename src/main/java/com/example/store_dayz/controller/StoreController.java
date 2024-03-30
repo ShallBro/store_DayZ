@@ -2,9 +2,12 @@ package com.example.store_dayz.controller;
 
 import com.example.store_dayz.model.Item;
 import com.example.store_dayz.service.StoreService;
+import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +29,11 @@ public class StoreController{
   public void addItem(@RequestBody Item item){
       storeService.addItemService(item);
   }
+
+  @GetMapping("/allItems")
+  public List<Map<String,Object>> allItems(){
+    return storeService.allItemsService();
+  }
+
 
 }

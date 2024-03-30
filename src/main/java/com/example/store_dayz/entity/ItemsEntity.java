@@ -25,7 +25,7 @@ public class ItemsEntity {
   private Integer price;
 
   @OneToMany(mappedBy = "item")
-  private List<AvailableServersEntity> availableServersEntityList;
+  private List<AvailableServersEntity> available_servers;
 
   public ItemsEntity(Item item) {
     name = item.getName();

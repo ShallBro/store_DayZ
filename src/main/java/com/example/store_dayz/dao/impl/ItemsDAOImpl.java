@@ -1,7 +1,9 @@
 package com.example.store_dayz.dao.impl;
 
+import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
 import com.example.store_dayz.model.Item;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,19 @@ public class ItemsDAOImpl {
     session.persist(itemsEntity);
     availableServersDAO.insertAvailableServers(itemsEntity.getId(), item);
   }
+
+  @Transactional
+  public List<ItemsEntity> selectItems() {
+    Session session = sessionFactory.getCurrentSession();
+    return session.createQuery("FROM ItemsEntity").getResultList();
+  }
+
+  @Transactional
+  public List<AvailableServersEntity> getAvailableServersForItem(long idItem) {
+    Session session = sessionFactory.getCurrentSession();
+    ItemsEntity itemsEntity = session.get(ItemsEntity.class, idItem);
+    return itemsEntity.getAvailable_servers();
+  }
+
 
 }
