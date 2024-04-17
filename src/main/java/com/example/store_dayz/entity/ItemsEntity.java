@@ -16,22 +16,38 @@ import lombok.Data;
 public class ItemsEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
   private String name;
   private String description;
-  private String category;
+  private Integer amount;
   private Integer price;
+  private String config;
+  private String category;
+  private String image;
 
   @OneToMany(mappedBy = "item")
-  private List<AvailableServersEntity> available_servers;
+  private List<AvailableServersEntity> availableServers;
 
   public ItemsEntity(Item item) {
+    id = item.getId();
     name = item.getName();
     description = item.getDescription();
-    category = item.getCategory();
+    amount = item.getAmount();
     price = item.getPrice();
+    config = item.getConfig();
+    category = item.getCategory();
+    image = item.getImage();
+  }
+
+  public void updateItemEntity(Item item) {
+    name = item.getName();
+    description = item.getDescription();
+    amount = item.getAmount();
+    price = item.getPrice();
+    config = item.getConfig();
+    category = item.getCategory();
+    image = item.getImage();
   }
 
   public ItemsEntity() {

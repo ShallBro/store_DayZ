@@ -1,6 +1,7 @@
 package com.example.store_dayz.service;
 
 import com.example.store_dayz.dao.impl.ItemsDAOImpl;
+import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
 import com.example.store_dayz.model.Item;
 import java.lang.reflect.Method;
@@ -25,18 +26,23 @@ public class StoreService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(StoreService.class);
 
-  public void addItemService(Item item){
-      LOGGER.info("Object item: {}", item);
+  public void addItem(Item item){
       itemsDAO.insertItem(item);
   }
 
-  public List<Map<String, Object>> allItemsService() {
-      List<String> listKeyMap = List.of("name", "description", "category", "available_servers", "price");
+  public void updateItem(Item item) {
+      itemsDAO.updateItem(item);
+  }
+  public void deleteItem(int id) {
+      itemsDAO.deleteItem(id);
+  }
+
+  public List<Map<String, Object>> getAllItems() {
+      List<String> listKeyMap = List.of("id", "name", "description", "amount", "price", "config", "category", "image");
       List<Map<String,Object>> items = new ArrayList<>();
       List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
-      // TODO Подумать как всё-таки переделать через массив Field доставать значение полей
       for (ItemsEntity itemsEntity : itemsEntities) {
-        itemsEntity.setAvailable_servers(itemsDAO.getAvailableServersForItem(itemsEntity.getId()));
+        itemsEntity.setAvailableServers(itemsDAO.getAvailableServersForItem(itemsEntity.getId()));
         Map<String,Object> itemsMap = listKeyMap.stream()
           .collect(Collectors.toMap(keyStr -> keyStr, keyStr -> {
             try {
@@ -46,6 +52,10 @@ public class StoreService {
               throw new RuntimeException(e);
             }
           }));
+        List<String> availableServersList = itemsEntity.getAvailableServers().stream()
+          .map(AvailableServersEntity::getName)
+          .collect(Collectors.toList());
+        itemsMap.put("available_servers", availableServersList);
         items.add(itemsMap);
       }
       return items;

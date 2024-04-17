@@ -4,6 +4,7 @@ import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
 import com.example.store_dayz.model.Item;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,21 @@ public class ItemsDAOImpl {
     Session session = sessionFactory.getCurrentSession();
     ItemsEntity itemsEntity = new ItemsEntity(item);
     session.persist(itemsEntity);
-    availableServersDAO.insertAvailableServers(itemsEntity.getId(), item);
+    availableServersDAO.insertAvailableServers(item);
+  }
+  // Продумать как обновлять available_servers сущность, чтобы это грамотно отрабатывало
+  @Transactional
+  public void updateItem(Item item) {
+    Session session = sessionFactory.getCurrentSession();
+    ItemsEntity itemsEntity = session.get(ItemsEntity.class, item.getId());
+    itemsEntity.updateItemEntity(item);
+  }
+
+  @Transactional
+  public void deleteItem(int id){
+    Session session = sessionFactory.getCurrentSession();
+    ItemsEntity itemsEntity = session.get(ItemsEntity.class, id);
+    session.remove(itemsEntity);
   }
 
   @Transactional
@@ -42,7 +57,8 @@ public class ItemsDAOImpl {
   public List<AvailableServersEntity> getAvailableServersForItem(long idItem) {
     Session session = sessionFactory.getCurrentSession();
     ItemsEntity itemsEntity = session.get(ItemsEntity.class, idItem);
-    return itemsEntity.getAvailable_servers();
+    Hibernate.initialize(itemsEntity.getAvailableServers());
+    return itemsEntity.getAvailableServers();
   }
 
 

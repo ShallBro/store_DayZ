@@ -20,11 +20,11 @@ public class AvailableServersDAOImpl {
   }
 
   @Transactional
-  public void insertAvailableServers(long itemId, Item item) {
+  public void insertAvailableServers(Item item) {
     item.getAvailable_servers().forEach(
       availableServer -> {
         Session session = sessionFactory.getCurrentSession();
-        ItemsEntity itemsEntity = session.get(ItemsEntity.class, itemId);
+        ItemsEntity itemsEntity = session.get(ItemsEntity.class, item.getId());
         AvailableServersEntity availableServersEntity = new AvailableServersEntity(itemsEntity, availableServer);
         session.persist(availableServersEntity);
       }
