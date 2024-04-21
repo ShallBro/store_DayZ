@@ -38,10 +38,12 @@ public class ItemsDAOImpl {
     Session session = sessionFactory.getCurrentSession();
     ItemsEntity itemsEntity = session.get(ItemsEntity.class, item.getId());
     itemsEntity.updateItemEntity(item);
+    availableServersDAO.updateAvailableServers(session, itemsEntity, item.getAvailable_servers());
+    session.merge(itemsEntity);
   }
 
   @Transactional
-  public void deleteItem(int id){
+  public void deleteItem(int id) {
     Session session = sessionFactory.getCurrentSession();
     ItemsEntity itemsEntity = session.get(ItemsEntity.class, id);
     session.remove(itemsEntity);
