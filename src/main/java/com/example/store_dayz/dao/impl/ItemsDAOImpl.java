@@ -32,7 +32,7 @@ public class ItemsDAOImpl {
     session.persist(itemsEntity);
     availableServersDAO.insertAvailableServers(item);
   }
-  // Продумать как обновлять available_servers сущность, чтобы это грамотно отрабатывало
+
   @Transactional
   public void updateItem(Item item) {
     Session session = sessionFactory.getCurrentSession();

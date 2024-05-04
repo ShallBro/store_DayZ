@@ -1,6 +1,7 @@
 package com.example.store_dayz.entity;
 
 import com.example.store_dayz.model.Item;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class ItemsEntity {
   private String category;
   private String image;
 
-  @OneToMany(mappedBy = "item")
+  @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
   private List<AvailableServersEntity> availableServers;
 
   public ItemsEntity(Item item) {

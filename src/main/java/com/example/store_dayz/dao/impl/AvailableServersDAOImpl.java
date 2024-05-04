@@ -3,6 +3,7 @@ package com.example.store_dayz.dao.impl;
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
 import com.example.store_dayz.model.Item;
+import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,28 @@ public class AvailableServersDAOImpl {
     );
   }
 
-  public void updateAvailableServers(Session session, ItemsEntity itemsEntity, List<String> availableServers) {
-     List<AvailableServersEntity> availableServersEntities = itemsEntity.getAvailableServers();
-     availableServersEntities.forEach(availableServerEntity -> {
-         availableServers.forEach(serverStr -> {
-             availableServerEntity.updateAvailableServersEntity(availableServerEntity.getItem(), serverStr);
-         });
-         session.merge(availableServerEntity);
+  public void updateAvailableServers(Session session, ItemsEntity itemsEntity, List<String> newAvailableServers) {
+     List<AvailableServersEntity> availableServersCurrent = itemsEntity.getAvailableServers();
+     List<AvailableServersEntity> updatedAvailableServers = new ArrayList<>();
+     newAvailableServers.forEach(server -> {
+       AvailableServersEntity existServer = findServer(itemsEntity.getAvailableServers(), server);
+       if (existServer != null) {
+         updatedAvailableServers.add(existServer);
+       } else {
+         AvailableServersEntity newServer = new AvailableServersEntity(itemsEntity, server);
+         updatedAvailableServers.add(newServer);
+       }
      });
+     availableServersCurrent.stream()
+       .filter(server -> !updatedAvailableServers.contains(server))
+       .forEach(session::remove);
+     itemsEntity.setAvailableServers(updatedAvailableServers);
+  }
+
+  private AvailableServersEntity findServer(List<AvailableServersEntity> availableServers, String server) {
+    return availableServers.stream()
+      .filter(availableServer -> availableServer.getName().equals(server))
+      .findFirst()
+      .orElse(null);
   }
 }

@@ -1,5 +1,6 @@
 package com.example.store_dayz.service;
 
+import com.example.store_dayz.dao.impl.AvailableServersDAOImpl;
 import com.example.store_dayz.dao.impl.ItemsDAOImpl;
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
@@ -19,9 +20,12 @@ public class StoreService {
 
   private final ItemsDAOImpl itemsDAO;
 
+  private final AvailableServersDAOImpl availableServersDAO;
+
   @Autowired
-  public StoreService(ItemsDAOImpl itemsDAO) {
+  public StoreService(ItemsDAOImpl itemsDAO, AvailableServersDAOImpl availableServersDAO) {
     this.itemsDAO = itemsDAO;
+    this.availableServersDAO = availableServersDAO;
   }
 
   private static final Logger LOGGER = LoggerFactory.getLogger(StoreService.class);
@@ -31,12 +35,13 @@ public class StoreService {
   }
 
   public void updateItem(Item item) {
-      itemsDAO.updateItem(item);
+    itemsDAO.updateItem(item);
   }
+
   public void deleteItem(int id) {
       itemsDAO.deleteItem(id);
   }
-
+  // TODO: Узнать возможно ли просто вернуть объект Item
   public List<Map<String, Object>> getAllItems() {
       List<String> listKeyMap = List.of("id", "name", "description", "amount", "price", "config", "category", "image");
       List<Map<String,Object>> items = new ArrayList<>();
