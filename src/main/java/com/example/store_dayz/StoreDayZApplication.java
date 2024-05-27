@@ -10,5 +10,4 @@ public class StoreDayZApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StoreDayZApplication.class, args);
 	}
-
 }
