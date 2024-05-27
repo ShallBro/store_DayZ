@@ -1,4 +1,4 @@
-package com.example.store_dayz.dao.impl;
+package com.example.store_dayz.dao;
 
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
+@Component
 public class AvailableServersDAOImpl {
 
   private final SessionFactory sessionFactory;

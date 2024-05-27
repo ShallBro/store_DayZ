@@ -1,17 +1,12 @@
 package com.example.store_dayz.service;
 
-import com.example.store_dayz.dao.impl.AvailableServersDAOImpl;
-import com.example.store_dayz.dao.impl.ItemsDAOImpl;
+import com.example.store_dayz.dao.ItemsDAOImpl;
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
 import com.example.store_dayz.model.Item;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +15,13 @@ public class StoreService {
 
   private final ItemsDAOImpl itemsDAO;
 
-  private final AvailableServersDAOImpl availableServersDAO;
-
   @Autowired
-  public StoreService(ItemsDAOImpl itemsDAO, AvailableServersDAOImpl availableServersDAO) {
+  public StoreService(ItemsDAOImpl itemsDAO) {
     this.itemsDAO = itemsDAO;
-    this.availableServersDAO = availableServersDAO;
   }
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(StoreService.class);
-
-  public void addItem(Item item){
-      itemsDAO.insertItem(item);
+  public void addItem(Item item) {
+    itemsDAO.insertItem(item);
   }
 
   public void updateItem(Item item) {
@@ -39,30 +29,30 @@ public class StoreService {
   }
 
   public void deleteItem(int id) {
-      itemsDAO.deleteItem(id);
+    itemsDAO.deleteItem(id);
   }
-  // TODO: Узнать возможно ли просто вернуть объект Item
-  public List<Map<String, Object>> getAllItems() {
-      List<String> listKeyMap = List.of("id", "name", "description", "amount", "price", "config", "category", "image");
-      List<Map<String,Object>> items = new ArrayList<>();
-      List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
-      for (ItemsEntity itemsEntity : itemsEntities) {
-        itemsEntity.setAvailableServers(itemsDAO.getAvailableServersForItem(itemsEntity.getId()));
-        Map<String,Object> itemsMap = listKeyMap.stream()
-          .collect(Collectors.toMap(keyStr -> keyStr, keyStr -> {
-            try {
-              Method getter = itemsEntity.getClass().getMethod("get" + keyStr.substring(0,1).toUpperCase() + keyStr.substring(1));
-              return getter.invoke(itemsEntity);
-            } catch (Exception e) {
-              throw new RuntimeException(e);
-            }
-          }));
-        List<String> availableServersList = itemsEntity.getAvailableServers().stream()
-          .map(AvailableServersEntity::getName)
-          .collect(Collectors.toList());
-        itemsMap.put("available_servers", availableServersList);
-        items.add(itemsMap);
-      }
-      return items;
+
+  public List<Item> getAllItems() {
+    List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
+    List<Item> itemList = new ArrayList<>();
+    for (ItemsEntity itemsEntity : itemsEntities) {
+      Item item = new Item();
+      List<AvailableServersEntity> availableServersEntities = itemsDAO.getAvailableServersForItem(itemsEntity.getId());
+      List<String> serversName = availableServersEntities.stream()
+        .map(AvailableServersEntity::getName)
+        .collect(Collectors.toList());
+      item.setAvailable_servers(serversName);
+      item.setId(itemsEntity.getId());
+      item.setAmount(itemsEntity.getAmount());
+      item.setConfig(itemsEntity.getConfig());
+      item.setName(itemsEntity.getName());
+      item.setCategory(itemsEntity.getCategory());
+      item.setPrice(itemsEntity.getPrice());
+      item.setImage(itemsEntity.getImage());
+      item.setDescription(itemsEntity.getDescription());
+      itemList.add(item);
+    }
+    return itemList;
   }
+
 }

@@ -33,7 +33,7 @@ public class StoreController{
   }
 
   @GetMapping("/allItems")
-  public List<Map<String,Object>> allItems(){
+  public List<Item> allItems(){
     return storeService.getAllItems();
   }
 

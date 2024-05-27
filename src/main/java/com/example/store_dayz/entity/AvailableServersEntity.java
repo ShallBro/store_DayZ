@@ -28,11 +28,6 @@ public class AvailableServersEntity {
     this.name = name;
   }
 
-  public void updateAvailableServersEntity(ItemsEntity item, String name){
-    this.item = item;
-    this.name = name;
-  }
-
   public AvailableServersEntity() {
 
   }
