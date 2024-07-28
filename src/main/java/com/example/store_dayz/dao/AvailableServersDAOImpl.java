@@ -2,7 +2,7 @@ package com.example.store_dayz.dao;
 
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
-import com.example.store_dayz.model.Item;
+import com.example.store_dayz.dto.ItemDTO;
 import java.util.ArrayList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,11 +23,11 @@ public class AvailableServersDAOImpl {
   }
 
   @Transactional
-  public void insertAvailableServers(Item item) {
-    item.getAvailable_servers().forEach(
+  public void insertAvailableServers(ItemDTO itemDTO) {
+    itemDTO.getAvailable_servers().forEach(
       availableServer -> {
         Session session = sessionFactory.getCurrentSession();
-        ItemsEntity itemsEntity = session.get(ItemsEntity.class, item.getId());
+        ItemsEntity itemsEntity = session.get(ItemsEntity.class, itemDTO.getId());
         AvailableServersEntity availableServersEntity = new AvailableServersEntity(itemsEntity, availableServer);
         session.persist(availableServersEntity);
       }

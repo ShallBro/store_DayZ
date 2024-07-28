@@ -1,13 +1,12 @@
-package com.example.store_dayz.model;
+package com.example.store_dayz.dto;
 
 import java.util.List;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Item {
+public class ItemDTO {
   private Long id;
   private String name;
   private String description;

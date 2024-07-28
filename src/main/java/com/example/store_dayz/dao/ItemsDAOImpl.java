@@ -2,7 +2,7 @@ package com.example.store_dayz.dao;
 
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
-import com.example.store_dayz.model.Item;
+import com.example.store_dayz.dto.ItemDTO;
 import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -26,19 +26,19 @@ public class ItemsDAOImpl {
   }
 
   @Transactional
-  public void insertItem(Item item) {
+  public void insertItem(ItemDTO itemDTO) {
     Session session = sessionFactory.getCurrentSession();
-    ItemsEntity itemsEntity = new ItemsEntity(item);
+    ItemsEntity itemsEntity = new ItemsEntity(itemDTO);
     session.persist(itemsEntity);
-    availableServersDAO.insertAvailableServers(item);
+    availableServersDAO.insertAvailableServers(itemDTO);
   }
 
   @Transactional
-  public void updateItem(Item item) {
+  public void updateItem(ItemDTO itemDTO) {
     Session session = sessionFactory.getCurrentSession();
-    ItemsEntity itemsEntity = session.get(ItemsEntity.class, item.getId());
-    itemsEntity.updateItemEntity(item);
-    availableServersDAO.updateAvailableServers(session, itemsEntity, item.getAvailable_servers());
+    ItemsEntity itemsEntity = session.get(ItemsEntity.class, itemDTO.getId());
+    itemsEntity.updateItemEntity(itemDTO);
+    availableServersDAO.updateAvailableServers(session, itemsEntity, itemDTO.getAvailable_servers());
     session.merge(itemsEntity);
   }
 

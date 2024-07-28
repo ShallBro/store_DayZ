@@ -1,10 +1,8 @@
 package com.example.store_dayz.controller;
 
-import com.example.store_dayz.model.Item;
-import com.example.store_dayz.service.StoreService;
+import com.example.store_dayz.dto.ItemDTO;
+import com.example.store_dayz.service.ItemsService;
 import java.util.List;
-import java.util.Map;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,35 +14,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/restApi")
-@NoArgsConstructor
-public class StoreController{
+@RequestMapping("/restApi/items")
+public class ItemsController {
 
-  private StoreService storeService;
+  private final ItemsService itemsService;
 
   @Autowired
-  public StoreController(StoreService storeService) {
-    this.storeService = storeService;
+  public ItemsController(ItemsService itemsService) {
+    this.itemsService = itemsService;
   }
 
   @PostMapping("/addItem")
-  public void addItem(@RequestBody Item item){
-      storeService.addItem(item);
+  public void addItem(@RequestBody ItemDTO itemDTO) {
+      itemsService.addItem(itemDTO);
   }
 
   @GetMapping("/allItems")
-  public List<Item> allItems(){
-    return storeService.getAllItems();
+  public List<ItemDTO> allItems(){
+    return itemsService.getAllItems();
   }
 
   @PutMapping("/updateItem")
-  public void updateItem(@RequestBody Item item){
-    storeService.updateItem(item);
+  public void updateItem(@RequestBody ItemDTO itemDTO) {
+    itemsService.updateItem(itemDTO);
   }
 
   @DeleteMapping("/deleteItem")
   public void deleteItem(@RequestParam("id") int id) {
-    storeService.deleteItem(id);
+    itemsService.deleteItem(id);
   }
 
 }
