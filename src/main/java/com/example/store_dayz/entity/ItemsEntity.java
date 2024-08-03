@@ -24,7 +24,7 @@ public class ItemsEntity {
   private String config;
   private String category;
   private String image;
-
+  // TODO: Прочитать про каскадные типы чё они делают
   @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
   private List<AvailableServersEntity> availableServers;
 

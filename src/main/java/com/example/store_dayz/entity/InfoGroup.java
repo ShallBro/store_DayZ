@@ -1,7 +1,9 @@
 package com.example.store_dayz.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,8 +43,8 @@ public class InfoGroup {
 
   private String name;
 
-  @ManyToOne
-  @JoinColumn(name = "features_id", referencedColumnName = "id")
-  private Feature feature;
+  @OneToMany(mappedBy = "item", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+  @JsonManagedReference
+  private List<Feature> features;
 
 }
