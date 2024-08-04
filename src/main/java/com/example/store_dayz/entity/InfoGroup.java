@@ -1,6 +1,7 @@
 package com.example.store_dayz.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,23 +26,23 @@ public class InfoGroup {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  private String structure;
-
-  private String lifeInside;
-
-  private String goals;
-
-  private String quote;
-
-  private String motto;
-
-  private String description;
+  private String name;
 
   private String founder;
 
-  private String value;
+  private String description;
 
-  private String name;
+  private String motto;
+
+  private String quote;
+
+  private String goals;
+
+  private String lifeInside;
+
+  private String structure;
+
+  private String caruselImg;
 
   @OneToMany(mappedBy = "item", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
   @JsonManagedReference
