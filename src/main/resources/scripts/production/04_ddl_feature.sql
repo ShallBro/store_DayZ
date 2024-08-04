@@ -1,8 +1,8 @@
 create table com_example_store_dayz.feature (
                          id uuid primary key,
-                         info_group_id uuid REFERENCES info_group(id) ON DELETE SET NULL,
-                         name varchar(50) not null,
-                         description varchar(7000)
+                         info_group_id uuid REFERENCES com_example_store_dayz.info_group(id) ON DELETE SET NULL,
+                         name varchar,
+                         description varchar
 );
 -- то что снизу, грузить при раскатке бд не сразу, потому что есть ссылочные типы, которые надо вставить
 INSERT INTO com_example_store_dayz.feature (id, info_group_id, name, description)

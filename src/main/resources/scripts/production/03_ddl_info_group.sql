@@ -1,17 +1,17 @@
 create table com_example_store_dayz.info_group (
                             id uuid primary key,
-                            name varchar(70) not null,
-                            value varchar(70) not null,
-                            founder varchar(70) not null,
-                            description varchar(70) not null,
-                            motto varchar(70) not null,
-                            quote varchar(70) not null,
-                            goals varchar(70) not null,
-                            lifeInside varchar(70) not null,
-                            structure varchar(70) not null,
-                            image varchar(70) not null,
-                            caruselImg varchar(70) not null,
-                            logoType varchar(70)
+                            name varchar,
+                            value varchar,
+                            founder varchar,
+                            description varchar,
+                            motto varchar,
+                            quote varchar,
+                            goals varchar,
+                            lifeInside varchar,
+                            structure varchar,
+                            image varchar,
+                            caruselImg varchar,
+                            logoType varchar
 );
 
 

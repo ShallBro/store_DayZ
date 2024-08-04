@@ -3,7 +3,6 @@ package com.example.store_dayz.service;
 import com.example.store_dayz.dto.GroupDTO;
 import com.example.store_dayz.dto.GroupInfoDTO;
 import com.example.store_dayz.dto.NameDTO;
-import com.example.store_dayz.entity.Feature;
 import com.example.store_dayz.entity.GroupStalker;
 import com.example.store_dayz.entity.InfoGroup;
 import com.example.store_dayz.exceptions.NotFoundGroupInfo;
@@ -35,8 +34,8 @@ public class GroupsService {
   }
   @Transactional
   public GroupInfoDTO getInfoGroup(NameDTO name) {
-    GroupStalker groupStalker = groupsRepository.findGroupStalkerByName(name.getName()).orElseThrow(() -> new NotFoundGroupInfo(name.getName()));
-    InfoGroup infoGroup = groupInfoRepository.findInfoGroupByName(name.getName()).orElseThrow(() -> new NotFoundGroupInfo(name.getName()));
+    GroupStalker groupStalker = groupsRepository.findGroupStalkerByPathUrl(name.getName()).orElseThrow(() -> new NotFoundGroupInfo(name.getName()));
+    InfoGroup infoGroup = groupInfoRepository.findInfoGroupByMotto(name.getName()).orElseThrow(() -> new NotFoundGroupInfo(name.getName()));
     return GroupInfoDTO.builder()
       .name(groupStalker.getName())
       .imageUrl(groupStalker.getImageUrl())

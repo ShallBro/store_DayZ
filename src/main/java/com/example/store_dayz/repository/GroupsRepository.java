@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupsRepository extends JpaRepository<GroupStalker, Long> {
-  Optional<GroupStalker> findGroupStalkerByName(String name);
+  Optional<GroupStalker> findGroupStalkerByPathUrl(String name);
 }

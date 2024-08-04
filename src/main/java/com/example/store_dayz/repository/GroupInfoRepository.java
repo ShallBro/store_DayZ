@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GroupInfoRepository extends JpaRepository<InfoGroup, UUID> {
-  Optional<InfoGroup> findInfoGroupByName(String name);
+  Optional<InfoGroup> findInfoGroupByMotto(String name);
 }

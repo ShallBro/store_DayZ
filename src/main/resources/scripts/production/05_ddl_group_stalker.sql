@@ -1,8 +1,8 @@
 create table com_example_store_dayz.group_stalker (
                                id serial primary key,
-                               name varchar(70) not null,
-                               imageUrl varchar(150) not null,
-                               pathUrl varchar(70) not null
+                               name varchar,
+                               imageUrl varchar,
+                               pathUrl varchar
 );
 
 INSERT INTO com_example_store_dayz.group_stalker (name, imageUrl, pathUrl)
