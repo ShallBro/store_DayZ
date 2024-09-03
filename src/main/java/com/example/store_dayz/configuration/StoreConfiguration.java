@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -51,7 +50,7 @@ public class StoreConfiguration {
   public LocalContainerEntityManagerFactoryBean sessionFactory() {
     LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
     em.setDataSource(dataSource());
-    em.setPackagesToScan(new String[]{"com.example.store_dayz"});
+    em.setPackagesToScan("com.example.store_dayz");
     em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
     return em;
   }
