@@ -1,4 +1,4 @@
-create table items (
+create table dayz.items (
     id bigint primary key,
     name varchar(150) not null,
     description varchar(1000),
