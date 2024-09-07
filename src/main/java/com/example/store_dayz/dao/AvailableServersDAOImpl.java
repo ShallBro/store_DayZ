@@ -24,7 +24,7 @@ public class AvailableServersDAOImpl {
 
   @Transactional
   public void insertAvailableServers(ItemDTO itemDTO) {
-    itemDTO.getAvailable_servers().forEach(
+    itemDTO.getAvailableServers().forEach(
       availableServer -> {
         Session session = sessionFactory.getCurrentSession();
         ItemsEntity itemsEntity = session.get(ItemsEntity.class, itemDTO.getId());

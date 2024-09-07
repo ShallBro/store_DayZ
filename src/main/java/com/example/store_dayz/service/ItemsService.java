@@ -36,22 +36,21 @@ public class ItemsService {
     List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
     List<ItemDTO> itemDTOList = new ArrayList<>();
     for (ItemsEntity itemsEntity : itemsEntities) {
-      ItemDTO itemDTO = new ItemDTO();
       List<AvailableServersEntity> availableServersEntities = itemsDAO.getAvailableServersForItem(itemsEntity.getId());
       List<String> serversName = availableServersEntities.stream()
         .map(AvailableServersEntity::getName)
         .collect(Collectors.toList());
-      // TODO: Переписать это на паттерн билдер
-      itemDTO.setAvailable_servers(serversName);
-      itemDTO.setId(itemsEntity.getId());
-      itemDTO.setAmount(itemsEntity.getAmount());
-      itemDTO.setConfig(itemsEntity.getConfig());
-      itemDTO.setName(itemsEntity.getName());
-      itemDTO.setCategory(itemsEntity.getCategory());
-      itemDTO.setPrice(itemsEntity.getPrice());
-      itemDTO.setImage(itemsEntity.getImage());
-      itemDTO.setDescription(itemsEntity.getDescription());
-      itemDTOList.add(itemDTO);
+      itemDTOList.add(ItemDTO.builder()
+              .availableServers(serversName)
+              .id(itemsEntity.getId())
+              .image(itemsEntity.getImage())
+              .amount(itemsEntity.getAmount())
+              .config(itemsEntity.getConfig())
+              .name(itemsEntity.getName())
+              .category(itemsEntity.getCategory())
+              .price(itemsEntity.getPrice())
+              .description(itemsEntity.getDescription())
+              .build());
     }
     return itemDTOList;
   }

@@ -38,7 +38,7 @@ public class ItemsDAOImpl {
     Session session = sessionFactory.getCurrentSession();
     ItemsEntity itemsEntity = session.get(ItemsEntity.class, itemDTO.getId());
     itemsEntity.updateItemEntity(itemDTO);
-    availableServersDAO.updateAvailableServers(session, itemsEntity, itemDTO.getAvailable_servers());
+    availableServersDAO.updateAvailableServers(session, itemsEntity, itemDTO.getAvailableServers());
     session.merge(itemsEntity);
   }
 
@@ -62,6 +62,5 @@ public class ItemsDAOImpl {
     Hibernate.initialize(itemsEntity.getAvailableServers());
     return itemsEntity.getAvailableServers();
   }
-
 
 }
