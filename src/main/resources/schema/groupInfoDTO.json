@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type":"object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "imageUrl": {
+      "type": "string"
+    },
+    "infoGroupDTO": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "founder": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "motto": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "goals": {
+          "type": "string"
+        },
+        "lifeinside": {
+          "type": "string"
+        },
+        "structure": {
+          "type": "string"
+        },
+        "caruselImg": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array"
+        }
+      }
+    }
+  }
+}
