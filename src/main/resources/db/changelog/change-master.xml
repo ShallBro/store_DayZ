@@ -4,8 +4,13 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="/scripts/01_ddl_info_group.sql"/>
-    <include file="/scripts/02_ddl_feature.sql"/>
-    <include file="/scripts/03_ddl_items.sql"/>
-    <include file="/scripts/04_ddl_group_stalker.sql"/>
+<!--    <include file="/scripts/01_ddl_info_group.sql"/>-->
+<!--    <include file="/scripts/02_ddl_feature.sql"/>-->
+<!--    <include file="/scripts/03_ddl_items.sql"/>-->
+<!--    <include file="/scripts/04_ddl_group_stalker.sql"/>-->
+    <include file="/production/01_ddl_items.sql"/>
+    <include file="/production/02_ddl_available_servers.sql"/>
+    <include file="/production/03_ddl_info_group.sql"/>
+    <include file="/production/04_ddl_feature.sql"/>
+    <include file="/production/05_ddl_group_stalker.sql"/>
 </databaseChangeLog>

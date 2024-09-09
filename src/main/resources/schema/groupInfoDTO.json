@@ -8,40 +8,32 @@
     "imageUrl": {
       "type": "string"
     },
-    "infoGroupDTO": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "founder": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "motto": {
-          "type": "string"
-        },
-        "quote": {
-          "type": "string"
-        },
-        "goals": {
-          "type": "string"
-        },
-        "lifeinside": {
-          "type": "string"
-        },
-        "structure": {
-          "type": "string"
-        },
-        "caruselImg": {
-          "type": "string"
-        },
-        "features": {
-          "type": "array"
-        }
-      }
+    "founder": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "motto": {
+      "type": "string"
+    },
+    "quote": {
+      "type": "string"
+    },
+    "goals": {
+      "type": "string"
+    },
+    "lifeinside": {
+      "type": "string"
+    },
+    "structure": {
+      "type": "string"
+    },
+    "caruselImg": {
+      "type": "string"
+    },
+    "features": {
+      "type": "array"
     }
   }
 }

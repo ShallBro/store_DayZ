@@ -1,11 +1,11 @@
-create table com_example_store_dayz.group_stalker (
+create table dayz.group_stalker (
                                                       id serial primary key,
                                                       name varchar,
                                                       imageUrl varchar,
                                                       pathUrl varchar
 );
 
-INSERT INTO com_example_store_dayz.group_stalker (name, imageUrl, pathUrl)
+INSERT INTO dayz.group_stalker (name, imageUrl, pathUrl)
 VALUES
     ('Нейтралы', 'https://i.ibb.co/xSYTpvB/neutrals-logo.png', 'neutrals'),
     ('Люди Бармена', 'https://i.ibb.co/cXg3bxd/lb-logo.png', 'lb'),
