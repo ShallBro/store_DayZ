@@ -29,6 +29,9 @@
     "structure": {
       "type": "string"
     },
+    "image": {
+      "type": "string"
+    },
     "caruselImg": {
       "type": "string"
     },

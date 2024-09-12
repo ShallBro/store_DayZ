@@ -38,6 +38,10 @@ public class ItemsEntity {
     image = itemDTO.getImage();
   }
 
+  public ItemsEntity() {
+
+  }
+
   public void updateItemEntity(ItemDTO itemDTO) {
     name = itemDTO.getName();
     description = itemDTO.getDescription();
@@ -46,9 +50,5 @@ public class ItemsEntity {
     config = itemDTO.getConfig();
     category = itemDTO.getCategory();
     image = itemDTO.getImage();
-  }
-
-  public ItemsEntity() {
-
   }
 }
