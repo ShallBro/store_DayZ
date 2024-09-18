@@ -3,7 +3,7 @@ package com.example.store_dayz.service;
 import com.example.store_dayz.dao.ItemsDAOImpl;
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
-import com.example.store_dayz.dto.ItemDTO;
+import com.example.types.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,25 +34,26 @@ public class ItemsService {
 
   public List<ItemDTO> getAllItems() {
     List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
-    List<ItemDTO> itemDTOList = new ArrayList<>();
+//    List<ItemDTO> itemDTOList = new ArrayList<>();
     for (ItemsEntity itemsEntity : itemsEntities) {
       List<AvailableServersEntity> availableServersEntities = itemsDAO.getAvailableServersForItem(itemsEntity.getId());
       List<String> serversName = availableServersEntities.stream()
         .map(AvailableServersEntity::getName)
         .collect(Collectors.toList());
-      itemDTOList.add(ItemDTO.builder()
-              .availableServers(serversName)
-              .id(itemsEntity.getId())
-              .image(itemsEntity.getImage())
-              .amount(itemsEntity.getAmount())
-              .config(itemsEntity.getConfig())
-              .name(itemsEntity.getName())
-              .category(itemsEntity.getCategory())
-              .price(itemsEntity.getPrice())
-              .description(itemsEntity.getDescription())
-              .build());
+//      itemDTOList.add(ItemDTO.builder()
+//              .availableServers(serversName)
+//              .id(itemsEntity.getId())
+//              .image(itemsEntity.getImage())
+//              .amount(itemsEntity.getAmount())
+//              .config(itemsEntity.getConfig())
+//              .name(itemsEntity.getName())
+//              .category(itemsEntity.getCategory())
+//              .price(itemsEntity.getPrice())
+//              .description(itemsEntity.getDescription())
+//              .build());
     }
-    return itemDTOList;
+    return null;
+//    return itemDTOList;
   }
 
 }

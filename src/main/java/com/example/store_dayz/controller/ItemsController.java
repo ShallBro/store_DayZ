@@ -1,6 +1,6 @@
 package com.example.store_dayz.controller;
 
-import com.example.store_dayz.dto.ItemDTO;
+import com.example.types.ItemDTO;
 import com.example.store_dayz.service.ItemsService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.example.store_dayz.entity;
 
-import com.example.store_dayz.dto.ItemDTO;
+import com.example.types.ItemDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,7 +15,7 @@ import lombok.Data;
 public class ItemsEntity {
 
   @Id
-  private long id;
+  private Long id;
 
   private String name;
   private String description;
@@ -28,7 +28,7 @@ public class ItemsEntity {
   private List<AvailableServersEntity> availableServers;
 
   public ItemsEntity(ItemDTO itemDTO) {
-    id = itemDTO.getId();
+//    id = itemDTO.getId();
     name = itemDTO.getName();
     description = itemDTO.getDescription();
     amount = itemDTO.getAmount();
