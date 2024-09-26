@@ -3,57 +3,44 @@ package com.example.store_dayz.service;
 import com.example.store_dayz.dao.ItemsDAOImpl;
 import com.example.store_dayz.entity.AvailableServersEntity;
 import com.example.store_dayz.entity.ItemsEntity;
+import com.example.store_dayz.mapper.GenericMapper;
+import com.example.store_dayz.repository.ItemsRepository;
 import com.example.types.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@RequiredArgsConstructor
 public class ItemsService {
 
-  private final ItemsDAOImpl itemsDAO;
+  private final ItemsRepository itemsRepository;
 
-  @Autowired
-  public ItemsService(ItemsDAOImpl itemsDAO) {
-    this.itemsDAO = itemsDAO;
-  }
+  private final GenericMapper<ItemDTO, ItemsEntity> genericMapper;
 
   public void addItem(ItemDTO itemDTO) {
-    itemsDAO.insertItem(itemDTO);
+   itemsRepository.save(new ItemsEntity(itemDTO));
   }
 
   public void updateItem(ItemDTO itemDTO) {
-    itemsDAO.updateItem(itemDTO);
+//    itemsDAO.updateItem(itemDTO);
   }
 
-  public void deleteItem(int id) {
-    itemsDAO.deleteItem(id);
+  public void deleteItem(String name) {
+    itemsRepository.deleteByName(name);
   }
 
   public List<ItemDTO> getAllItems() {
-    List<ItemsEntity> itemsEntities = itemsDAO.selectItems();
-//    List<ItemDTO> itemDTOList = new ArrayList<>();
+    List<ItemsEntity> itemsEntities = itemsRepository.findAll();
+    List<ItemDTO> itemDTOList = new ArrayList<>();
     for (ItemsEntity itemsEntity : itemsEntities) {
-      List<AvailableServersEntity> availableServersEntities = itemsDAO.getAvailableServersForItem(itemsEntity.getId());
-      List<String> serversName = availableServersEntities.stream()
-        .map(AvailableServersEntity::getName)
-        .collect(Collectors.toList());
-//      itemDTOList.add(ItemDTO.builder()
-//              .availableServers(serversName)
-//              .id(itemsEntity.getId())
-//              .image(itemsEntity.getImage())
-//              .amount(itemsEntity.getAmount())
-//              .config(itemsEntity.getConfig())
-//              .name(itemsEntity.getName())
-//              .category(itemsEntity.getCategory())
-//              .price(itemsEntity.getPrice())
-//              .description(itemsEntity.getDescription())
-//              .build());
+      itemDTOList.add(genericMapper.toDto(itemsEntity));
     }
-    return null;
-//    return itemDTOList;
+    return itemDTOList;
   }
 
 }

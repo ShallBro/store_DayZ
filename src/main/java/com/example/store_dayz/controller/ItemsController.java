@@ -40,8 +40,8 @@ public class ItemsController {
   }
 
   @DeleteMapping("/deleteItem")
-  public void deleteItem(@RequestParam("id") int id) {
-    itemsService.deleteItem(id);
+  public void deleteItem(@RequestParam("name") String name) {
+    itemsService.deleteItem(name);
   }
 
 }

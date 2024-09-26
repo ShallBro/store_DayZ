@@ -3,10 +3,13 @@ package com.example.store_dayz.entity;
 import com.example.types.ItemDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+import java.util.UUID;
 import lombok.Data;
 
 @Entity
@@ -15,7 +18,8 @@ import lombok.Data;
 public class ItemsEntity {
 
   @Id
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
 
   private String name;
   private String description;
@@ -28,7 +32,6 @@ public class ItemsEntity {
   private List<AvailableServersEntity> availableServers;
 
   public ItemsEntity(ItemDTO itemDTO) {
-//    id = itemDTO.getId();
     name = itemDTO.getName();
     description = itemDTO.getDescription();
     amount = itemDTO.getAmount();
